@@ -2,6 +2,7 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "./Card";
+import { CardNew } from "./CardNew";
 import { update } from "../../todosSlice";
 
 export const Todos = () => {
@@ -37,15 +38,15 @@ export const Todos = () => {
     };
 
     return (
-        <div className='container mt-5'>
-            <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4'>
-                {categories.map((category) => {
+        <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 mt-5'>
+            {categories
+                .map((category, index) => {
                     const todosInCategory = todos.filter(
                         (item) => item.category == category.id
                     );
 
                     return (
-                        <div className='col' key={category.id}>
+                        <div className='col' key={index}>
                             <Card
                                 handleDragStart={handleDragStart}
                                 handleDragEnd={handleDragEnd}
@@ -56,8 +57,8 @@ export const Todos = () => {
                             />
                         </div>
                     );
-                })}
-            </div>
+                })
+                .concat(<CardNew key={categories.length + 1} />)}
         </div>
     );
 };

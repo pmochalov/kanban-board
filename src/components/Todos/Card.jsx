@@ -63,7 +63,7 @@ export const Card = ({
                         onClick={handleAddTodo}
                         className='btn btn-sm fw-bold bg-dark bg-opacity-10'
                     >
-                        +
+                        ➕
                     </button>
                 </div>
             </div>
@@ -95,7 +95,7 @@ export const Card = ({
                     </li>
                 )}
 
-                {todos.length === 0 && <TodosNotFounded />}
+                {todos.length === 0 && <TodosNotFounded theme={category.theme}/>}
 
                 {todos.map((item) => (
                     <Todo

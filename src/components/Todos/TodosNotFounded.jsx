@@ -1,9 +1,9 @@
 import React from "react";
 
-export const TodosNotFounded = () => {
+export const TodosNotFounded = ({ theme }) => {
     return (
-        <li className='list-group-item d-flex justify-content-between align-items-center'>
-            &mdash;
+        <li className='list-group-item'>
+            <span className={`text-${theme}`}>&mdash;</span>
         </li>
     );
 };

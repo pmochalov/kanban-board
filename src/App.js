@@ -12,8 +12,7 @@ function App() {
       <div className="row py-4">
         <div className="col">
 
-          <Title title="Канбан" />
-
+          <Title />
           <Todos />
 
         </div>

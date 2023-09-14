@@ -15,22 +15,7 @@ const initialState = [
         id: 3,
         title: 'Сделано',
         theme: 'success'
-    },
-    {
-        id: 4,
-        title: 'В архиве',
-        theme: 'dark'
-    }, 
-    {
-        id: 5,
-        title: 'Сделать',
-        theme: 'warning'
-    },
-    {
-        id: 6,
-        title: 'В процессе',
-        theme: 'primary'
-    },
+    }
 ]
 
 export const categoriesSlice = createSlice({

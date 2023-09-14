@@ -1,33 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-    {
-        id: 1,
-        title: 'Сделать'
-    },
-    {
-        id: 2,
-        title: 'В процессе'
-    },
-    {
-        id: 3,
-        title: 'Сделано'
-    }    
-]
+const initialState = {
+    title: 'Канбан'
+}
 
-export const categoriesSlice = createSlice({
-    name: 'categories',
+export const appSlice = createSlice({
+    name: 'app',
     initialState,
     reducers: {
-        add: (state, action) => {
-            state.push(action.payload)
-        },
-        remove: (state, action) => {
-            const id = action.payload;
-            return state.filter(todo => todo.id !== id);
+        update: (state, action) => {
+            return {...state, ...action.payload}
         }
     }
 });
 
-export const { add, remove } = categoriesSlice.actions;
-export default categoriesSlice.reducer;
+export const { update } = appSlice.actions;
+export default appSlice.reducer;
