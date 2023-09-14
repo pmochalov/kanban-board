@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { Title } from "./components/TItle/Title";
-import { FormAddTodo } from "./components/FormAddTodo/FormAddTodo";
 import { Todos } from "./components/Todos/Todos";
 
 function App() {
@@ -14,8 +13,6 @@ function App() {
         <div className="col">
 
           <Title title="Канбан" />
-
-          <FormAddTodo />
 
           <Todos />
 
