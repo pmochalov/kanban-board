@@ -38,7 +38,7 @@ export const Todos = () => {
 
     return (
         <div className='container mt-5'>
-            <div className='row row-cols-4'>
+            <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4'>
                 {categories.map((category) => {
                     const todosInCategory = todos.filter(
                         (item) => item.category == category.id

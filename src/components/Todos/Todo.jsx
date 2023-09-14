@@ -34,7 +34,7 @@ export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
         dispatch(
             update({
                 id: +todoEdit.id,
-                obj: todoEdit,
+                obj: { ...todoEdit, date: Date.now() },
             })
         );
         setTodoEdit(null);
@@ -90,7 +90,7 @@ export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
             >
                 <div className='d-flex flex-column'>
                     <div>{item.todo}</div>
-                    <div className="mt-2">
+                    <div className='mt-2'>
                         <small className='text-muted'>
                             {new Date(item.date).toLocaleString("ru-RU")}
                         </small>
