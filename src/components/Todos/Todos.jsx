@@ -3,12 +3,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "./Card";
 import { CardNew } from "./CardNew";
+import { Spinner } from "../Spinner/Spinner";
+
 import { update, fetchTodos } from "./../../slices/todosSlice";
 
 export const Todos = () => {
     const dispatch = useDispatch();
 
     const todos = useSelector((state) => state.todos.data);
+    const status = useSelector((state) => state.todos.status);
     const categories = useSelector((state) => state.categories);
 
     const [targetCardId, setTargetTaskId] = React.useState(null);
@@ -40,6 +43,14 @@ export const Todos = () => {
     React.useEffect(() => {
         dispatch(fetchTodos());
     }, []);
+
+    if (status !== "successful") {
+        return (
+            <div className='d-flex justify-content-center py-3'>
+                <Spinner />
+            </div>
+        );
+    }
 
     return (
         <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 mt-5'>
