@@ -1,10 +1,9 @@
 import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { update, remove } from "./../../slices/todosSlice";
 
 export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
-    const todos = useSelector((state) => state.todos);
     const dispatch = useDispatch();
 
     const [isEditing, setIsEditing] = React.useState(false);

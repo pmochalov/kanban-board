@@ -17,8 +17,8 @@ export const Title = () => {
 
     const handleCancelEdit = () => {
         setTitle(app.title);
-        setIsEdit(false)
-    }
+        setIsEdit(false);
+    };
 
     if (isEdit) {
         return (
