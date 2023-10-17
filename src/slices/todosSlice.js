@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchTodos = createAsyncThunk(
     'todos/fetchTodos',
     async () => {
-        const response = await fetch('https://652e5dbb0b8d8ddac0b13eec.mockapi.io/api/v1/todos');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/todos`);
         const data = await response.json();
         return data;
     }
