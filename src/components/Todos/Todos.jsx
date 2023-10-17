@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "./Card";
 import { CardNew } from "./CardNew";
-import { update } from "../../todosSlice";
+import { update } from "./../../slices/todosSlice";
 
 export const Todos = () => {
     const dispatch = useDispatch();

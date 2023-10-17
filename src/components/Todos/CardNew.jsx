@@ -1,11 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { add } from "../../categoriesSlice";
-
-const themes = ["success", "primary", "danger", "warning"];
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "./../../slices/categoriesSlice";
 
 export const CardNew = () => {
     const dispatch = useDispatch();
+    const { themes } = useSelector((store) => store.app);
 
     const [title, setTitle] = React.useState("");
     const [theme, setTheme] = React.useState(themes[0]);

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { update } from "../../appSlice";
+import { update } from "./../../slices/appSlice";
 
 export const Title = () => {
     const app = useSelector((state) => state.app);

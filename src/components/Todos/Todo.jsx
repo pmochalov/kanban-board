@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { update, remove } from "../../todosSlice";
+import { update, remove } from "./../../slices/todosSlice";
 
 export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
     const todos = useSelector((state) => state.todos);
@@ -14,19 +14,8 @@ export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
         dispatch(remove(item.id));
     };
 
-    const handleTodoEdit = (e) => {
-        if (!e.currentTarget.dataset.id) {
-            return;
-        }
-
-        const todoId = +e.currentTarget.dataset.id;
-        const todoById = todos.find((todo) => todo.id === todoId);
-
-        if (!todoById) {
-            return;
-        }
-
-        setTodoEdit({ ...todoById });
+    const handleTodoEdit = () => {
+        setTodoEdit({ ...item });
         setIsEditing(true);
     };
 
@@ -46,9 +35,18 @@ export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
         setIsEditing(false);
     };
 
+    const handleTodoDone = () => {
+        dispatch(
+            update({
+                id: item.id,
+                obj: { ...item, done: !item.done },
+            })
+        );
+    };
+
     if (isEditing) {
         return (
-            <li className='list-group-item d-flex flex-column'>
+            <li className='list-group-item d-flex flex-column px-2'>
                 <div>
                     <textarea
                         value={todoEdit.todo}
@@ -78,31 +76,41 @@ export const Todo = ({ item, handleDragStart, handleDragEnd }) => {
         );
     }
 
-    if (!isEditing) {
-        return (
-            <li
-                onDoubleClick={handleTodoEdit}
-                className='list-group-item d-flex justify-content-between align-items-center'
-                data-id={item.id}
-                draggable='true'
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-            >
-                <div className='d-flex flex-column'>
-                    <div>{item.todo}</div>
-                    <div className='mt-2'>
-                        <small className='text-muted'>
-                            {new Date(item.date).toLocaleString("ru-RU")}
-                        </small>
-                    </div>
-                </div>
-                <button
-                    onClick={handleRemove}
-                    className='btn btn-light btn-sm align-self-start'
+    return (
+        <li
+            data-id={item.id}
+            onDoubleClick={handleTodoEdit}
+            className='list-group-item d-flex justify-content-between align-items-center px-2'
+            draggable='true'
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+        >
+            <div className='align-self-start'>
+                <input
+                    type='checkbox'
+                    onChange={handleTodoDone}
+                    checked={item.done}
+                    className='form-check-input'
+                />
+            </div>
+            <div className='d-flex flex-column flex-grow-1 px-2'>
+                <div
+                    className={item.done ? "text-decoration-line-through" : ""}
                 >
-                    &times;
-                </button>
-            </li>
-        );
-    }
+                    {item.todo}
+                </div>
+                <div className='mt-2'>
+                    <small className='text-muted'>
+                        {new Date(item.date).toLocaleString("ru-RU")}
+                    </small>
+                </div>
+            </div>
+            <button
+                onClick={handleRemove}
+                className='btn btn-light btn-sm align-self-start'
+            >
+                &times;
+            </button>
+        </li>
+    );
 };

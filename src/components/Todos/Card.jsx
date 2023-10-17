@@ -4,7 +4,7 @@ import { TodosNotFounded } from "./TodosNotFounded";
 import { Todo } from "./Todo";
 
 import { useDispatch } from "react-redux";
-import { add } from "../../todosSlice";
+import { add } from "../../slices/todosSlice";
 
 export const Card = ({
     todos,
@@ -42,16 +42,17 @@ export const Card = ({
         setIsNewAdded(false);
     };
 
+    const cardClass = `card mb-3 bg-${category.theme} bg-opacity-25 border-${category.theme} border-opacity-25`;
+    const headerClass = `card-header bg-${category.theme} bg-opacity-25 border-0 d-flex justify-content-between align-items-center`;
+
     return (
         <div
-            className={`card mb-3 bg-${category.theme} bg-opacity-25 border-${category.theme} border-opacity-25`}
+            className={cardClass}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             data-card-id={category.id}
         >
-            <div
-                className={`card-header bg-${category.theme} bg-opacity-25 border-0 d-flex justify-content-between align-items-center`}
-            >
+            <div className={headerClass}>
                 <div className='fw-bold'>
                     <span>{category.title}</span>&nbsp;
                     <small className='fw-normal text-muted'>
@@ -69,7 +70,7 @@ export const Card = ({
             </div>
             <ul className='list-group list-group-flush'>
                 {isNewAdded && (
-                    <li className='list-group-item d-flex flex-column'>
+                    <li className='list-group-item d-flex flex-column px-2'>
                         <div>
                             <textarea
                                 value={todo}
@@ -95,7 +96,9 @@ export const Card = ({
                     </li>
                 )}
 
-                {todos.length === 0 && <TodosNotFounded theme={category.theme}/>}
+                {todos.length === 0 && (
+                    <TodosNotFounded theme={category.theme} />
+                )}
 
                 {todos.map((item) => (
                     <Todo

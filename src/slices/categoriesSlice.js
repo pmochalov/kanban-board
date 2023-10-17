@@ -13,7 +13,7 @@ const initialState = [
     },
     {
         id: 3,
-        title: 'Сделано',
+        title: 'Сделано ✔️',
         theme: 'success'
     }
 ]

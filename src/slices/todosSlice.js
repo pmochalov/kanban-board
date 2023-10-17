@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { initialState } from "../data";
+
 export const todosSlice = createSlice({
     name: 'todos',
-    initialState: [],
+    initialState,
     reducers: {
         add: (state, action) => {
             state.push(action.payload)

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    title: 'Канбан'
+    title: 'Канбан',
+    themes: ["success", "primary", "danger", "warning"]
 }
 
 export const appSlice = createSlice({
