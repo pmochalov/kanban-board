@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// import { initialState } from "../data";
-
 export const fetchTodos = createAsyncThunk(
     'todos/fetchTodos',
     async () => {

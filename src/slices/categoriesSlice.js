@@ -1,34 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = [
-    {
-        id: 1,
-        title: 'Сделать',
-        theme: 'warning'
-    },
-    {
-        id: 2,
-        title: 'В процессе',
-        theme: 'primary'
-    },
-    {
-        id: 3,
-        title: 'Сделано ✔️',
-        theme: 'success'
+export const fetchCategories = createAsyncThunk(
+    'todos/fetchCategories',
+    async () => {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/categories`);
+        const data = await response.json();
+        return data;
     }
-]
+);
+
+const initialState = {
+    status: 'idle',
+    data: []
+}
 
 export const categoriesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {
         add: (state, action) => {
-            state.push(action.payload)
+            state.data.push(action.payload)
         },
         remove: (state, action) => {
             const id = action.payload;
-            return state.filter(todo => todo.id !== id);
+            return state.data.filter(todo => todo.id !== id);
         }
+    },
+    extraReducers: {
+        [fetchCategories.pending]: (state) => {
+            state.status = 'loading';
+        },
+        [fetchCategories.fulfilled]: (state, action) => {
+            state.status = 'successful';
+            state.data = action.payload;
+        },
+        [fetchCategories.rejected]: (state) => {
+            state.status = 'failed';
+        }                   
     }
 });
 

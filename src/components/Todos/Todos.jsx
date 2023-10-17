@@ -6,13 +6,16 @@ import { CardNew } from "./CardNew";
 import { Spinner } from "../Spinner/Spinner";
 
 import { update, fetchTodos } from "./../../slices/todosSlice";
+import { fetchCategories } from "../../slices/categoriesSlice";
 
 export const Todos = () => {
     const dispatch = useDispatch();
 
     const todos = useSelector((state) => state.todos.data);
-    const status = useSelector((state) => state.todos.status);
-    const categories = useSelector((state) => state.categories);
+    const statusTodos = useSelector((state) => state.todos.status);
+
+    const categories = useSelector((state) => state.categories.data);
+    const statusCategories = useSelector((state) => state.todos.status);
 
     const [targetCardId, setTargetTaskId] = React.useState(null);
     const [draggableTaskId, setDraggableTaskId] = React.useState(null);
@@ -41,10 +44,11 @@ export const Todos = () => {
     };
 
     React.useEffect(() => {
+        dispatch(fetchCategories());
         dispatch(fetchTodos());
     }, []);
 
-    if (status !== "successful") {
+    if (statusCategories !== "successful" || statusTodos !== "successful") {
         return (
             <div className='d-flex justify-content-center py-3'>
                 <Spinner />
