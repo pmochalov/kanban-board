@@ -15,6 +15,11 @@ export const Title = () => {
         setIsEdit(false);
     };
 
+    const handleCancelEdit = () => {
+        setTitle(app.title);
+        setIsEdit(false)
+    }
+
     if (isEdit) {
         return (
             <div className='row'>
@@ -28,7 +33,7 @@ export const Title = () => {
                             placeholder='Название доски'
                         />
                         <button
-                            onClick={() => setIsEdit(false)}
+                            onClick={handleCancelEdit}
                             className='btn btn-light border-light'
                             type='button'
                         >
