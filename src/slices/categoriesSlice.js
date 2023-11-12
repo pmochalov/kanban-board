@@ -26,17 +26,18 @@ export const categoriesSlice = createSlice({
             return state.data.filter(todo => todo.id !== id);
         }
     },
-    extraReducers: {
-        [fetchCategories.pending]: (state) => {
-            state.status = 'loading';
-        },
-        [fetchCategories.fulfilled]: (state, action) => {
-            state.status = 'successful';
-            state.data = action.payload;
-        },
-        [fetchCategories.rejected]: (state) => {
-            state.status = 'failed';
-        }                   
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCategories.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchCategories.fulfilled, (state, action) => {
+                state.status = 'successful';
+                state.data = action.payload;
+            })
+            .addCase(fetchCategories.rejected, (state) => {
+                state.status = 'failed';
+            })
     }
 });
 

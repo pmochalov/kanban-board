@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 
 export const fetchTodos = createAsyncThunk(
     'todos/fetchTodos',
@@ -13,6 +13,9 @@ const initialState = {
     status: 'idle',
     data: []
 }
+
+// const incrementBy = createAction('incrementBy')
+// const decrement = createAction('decrement')
 
 export const todosSlice = createSlice({
     name: 'todos',
@@ -34,17 +37,18 @@ export const todosSlice = createSlice({
             state.data.splice(index, 1);
         }
     },
-    extraReducers: {
-        [fetchTodos.pending]: (state) => {
-            state.status = 'loading';
-        },
-        [fetchTodos.fulfilled]: (state, action) => {
-            state.status = 'successful';
-            state.data = action.payload;
-        },
-        [fetchTodos.rejected]: (state) => {
-            state.status = 'failed';
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchTodos.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchTodos.fulfilled, (state, action) => {
+                state.status = 'successful';
+                state.data = action.payload;
+            })
+            .addCase(fetchTodos.rejected, (state) => {
+                state.status = 'failed';
+            })
     }
 });
 
