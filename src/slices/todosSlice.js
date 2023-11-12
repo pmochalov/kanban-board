@@ -26,7 +26,7 @@ export const todosSlice = createSlice({
             const id = data.id;
             const obj = data.obj;
             const index = state.data.findIndex(todo => todo.id === id);
-            state.data.splice(index, 1, { ...state[index], ...obj });
+            state.data.splice(index, 1, { ...state.data[index], ...obj });
         },
         remove: (state, action) => {
             const id = action.payload;
@@ -44,7 +44,7 @@ export const todosSlice = createSlice({
         },
         [fetchTodos.rejected]: (state) => {
             state.status = 'failed';
-        }                   
+        }
     }
 });
 
